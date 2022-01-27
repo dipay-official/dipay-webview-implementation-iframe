@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe src="https://m.evy.id/activation?clientId={CLIEND_ID}&phoneNumber={PHONE_NUMBER}"  height="512"
+        title="Iframe Example"></iframe>
+
+    <script>
+
+        function callback(e) {
+            console.log(e)
+            /* Only allow origin from Evy WebView URL */
+                /*if(e.origin !== 'http://192.168.88.159:3001'){
+                    return;
+                }*/
+            /* Stringify the json */
+            var data = JSON.stringify(e.data.callback);
+
+            /* Check the type of postMessage */
+            if (e.data.type == 'ACTIVATION') {
+                /*do something */
+                console.log(data);
+                alert(data);
+            } else if (e.data.type == 'PAYMENT') {
+                /*do something */
+                console.log(data);
+                alert(data);
+            } else if (e.data.type == 'CLOSE_WEBVIEW') {
+                /*do something */
+                console.log(data);
+                alert(data);
+                /* Call JavaScript Interface onClose */
+            } else if (e.data.type == "UNLINK") {
+                /*do something */
+                console.log(data);
+                alert(data);
+            }
+        }
+        if (window.addEventListener) {
+            // For standards-compliant web browsers
+            window.addEventListener("message", callback, false);
+            
+        }
+        else {
+            window.attachEvent("onmessage", callback);
+        }
+
+
+    </script>
+</body>
+
+</html>
